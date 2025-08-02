@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - 4020:80
+    restart: on-failure
+    container_name: gitforgits-web
+    depends_on:
+      - db
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: gitforgits
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 123456

@@ -2,28 +2,27 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net/http"
 )
 
 type Book struct {
-	ID int
-	Title string
-	Author string
+	ID          int
+	Title       string
+	Author      string
 	Description string
-	Price float64
+	Price       float64
 }
 
-func getBookDetails(id int) *Book {
-	book := &Book{
-		ID: id,
-		Title: "The Go Programming Language",
-		Author: "Alan A. A. Donovan and Brian W. Kernighan",
-		Description: "The Go Programming Language is a statically typed, compiled language that supports multiple programming paradigms.",
-		Price: 49.99,
-	}
-	return book
-}
+
 
 func main() {
-	book := getBookDetails(1)
-	fmt.Printf("Book Details: %+v\n", book)
+	// Define HTTP handlers
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hello, World!")
+	})
+	
+	// Start HTTP server
+	fmt.Println("Server starting on port 80...")
+	log.Fatal(http.ListenAndServe(":80", nil))
 }
